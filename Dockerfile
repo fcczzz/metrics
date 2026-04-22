@@ -19,8 +19,8 @@ RUN chmod +x /metrics/source/app/action/index.mjs \
   && apt-get install -y curl unzip \
   && curl -fsSL https://deno.land/x/install/install.sh | DENO_INSTALL=/usr/local sh \
   # Install ruby to support github licensed gem
-  && apt-get install -y ruby-full git g++ cmake pkg-config libssl-dev \
-  && gem install licensed \
+  && apt-get install -y ruby-full ruby-dev git build-essential cmake pkg-config libssl-dev zlib1g-dev liblzma-dev patch libxml2-dev libxslt1-dev \
+  && gem install licensed --no-document \
   # Install python for node-gyp
   && apt-get install -y python3 \
   # Clean apt/lists
@@ -30,8 +30,8 @@ RUN chmod +x /metrics/source/app/action/index.mjs \
   && npm run build
 
 # Environment variables
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV PUPPETEER_BROWSER_PATH "google-chrome-stable"
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_BROWSER_PATH=google-chrome-stable
 
 # Execute GitHub action
-ENTRYPOINT node /metrics/source/app/action/index.mjs
+ENTRYPOINT ["node", "/metrics/source/app/action/index.mjs"]
