@@ -269,6 +269,7 @@ export default async function({faker}, target, that, [{username: login, page, pe
           size: 1,
           ref: "refs/heads/master",
           commits: [
+            undefined,
             {
               sha: "MOCKED_SHA",
               message: faker.lorem.sentence(),
